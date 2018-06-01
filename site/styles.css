@@ -14,6 +14,7 @@
   font-size: 14px;
   text-align: center;
   font-weight: 300;
+  color: white;
 }
 
 .is-compact .mdl-layout__title span {
@@ -29,11 +30,11 @@
 }
 
 .portfolio-logo {
-  background: url(images/logo.png) 50% no-repeat;
-  background-size: cover;
-  height: 150px;
+  background: url(images/logo.png) 80% no-repeat;
+  background-size: contain;
+  height: 160px;
   width: 150px;
-  margin: auto auto 10px;
+  margin: auto auto 20px;
 }
 
 .is-compact .portfolio-logo {
@@ -52,6 +53,7 @@
   text-align: center;
   max-width: 900px;
   width: 100%;
+  color: white;
 }
 
 .portfolio-navigation-row .mdl-navigation__link {
@@ -59,6 +61,7 @@
       -ms-flex: 1;
           flex: 1;
   line-height: 42px;
+  color: white;
 }
 
 .portfolio-header .mdl-layout__drawer-button {
