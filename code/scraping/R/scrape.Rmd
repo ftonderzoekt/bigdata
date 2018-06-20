@@ -13,7 +13,7 @@ library(rvest)
 ## Clean spaces and returns
 
 space_cleaner <- function(string) {
-  cleanstring <- gsub("\\n\\s\\s+|\\n|^\\s+", "", string)
+  cleanstring <- gsub("\\n\\s\\s+|\\n|^\\s+|Job Location", "", string)
   return(cleanstring)
 }
 
