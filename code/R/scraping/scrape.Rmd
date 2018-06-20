@@ -1,0 +1,54 @@
+---
+title: "Extract jobs from websites"
+output: html_notebook
+---
+
+# Scrape data from saved Linkedin file
+[This](Source: https://www.linkedin.com/jobs/data-scientist-jobs/?country=nl) file was saved as an html file and stored on a local machine. Using the `rvest` package job data was extracted and saved as a csv file.
+
+```{r}
+library(rvest)
+
+# Functions
+## Clean spaces and returns
+
+space_cleaner <- function(string) {
+  cleanstring <- gsub("\\n\\s\\s+|\\n|^\\s+|Job Location", "", string)
+  return(cleanstring)
+}
+
+linked_jobs <- read_html("linkedin.html")
+
+job <- linked_jobs %>% 
+  html_nodes(".job-card-search__title") %>%
+  html_text() %>% space_cleaner
+
+company <- linked_jobs %>% 
+  html_nodes(".job-card-search__company-name") %>%
+  html_text() %>% space_cleaner
+
+location <- linked_jobs %>% 
+  html_nodes(".job-card-search__location") %>%
+  html_text() %>% space_cleaner
+
+snippet <- linked_jobs %>% 
+  html_nodes(".job-card-search__description-snippet") %>%
+  html_text() %>% space_cleaner
+
+time <- linked_jobs %>% 
+  html_nodes(".job-card-search__time-badge") %>%
+  html_text() %>% space_cleaner
+
+
+
+dfLinkedin <- cbind(job, company, location, snippet, time) %>% data.frame(stringsAsFactors = FALSE)
+
+timestamp <- rep(date(), dim(dfLinkedin)[1])
+dfLinkedin <- cbind(dfLinkedin, timestamp)
+
+head(dfLinkedin)
+str(dfLinkedin)
+
+write.csv(dfLinkedin, "linkedin-jobs.csv")
+```
+

@@ -1,0 +1,39 @@
+---
+title: "Rtweet"
+output: html_notebook
+---
+
+```{r}
+library(rtweet)
+library(plotly)
+
+## authenticate via access token
+token <- create_token(
+  app = "Witek",
+  consumer_key = Sys.getenv("CONSUMER_KEY"),
+  consumer_secret = Sys.getenv("CONSUMER_SECRET"),
+  access_token = Sys.getenv("ACCESS_TOKEN"),
+  access_secret = Sys.getenv("ACCESS_SECRET")
+  )
+
+## search for 18000 tweets using the rstats hashtag
+rt <- search_tweets(
+  "data + scientist OR analyst OR analist OR engineer + lang:nl", n = 10000, include_rts = FALSE
+)
+
+## preview tweets data
+rt
+
+## preview users data
+users_data(rt)
+
+## plot time series (if ggplot2 is installed)
+p <- ts_plot(rt)
+ggplotly(p, width = "900")
+
+rt <- apply(rt,2,as.character)
+
+write.csv(rt, "twitter-jobs.csv")
+
+```
+
