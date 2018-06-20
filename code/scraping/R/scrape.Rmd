@@ -47,31 +47,3 @@ str(dfLinkedin)
 write.csv(dfLinkedin, "linkedin-jobs.csv")
 ```
 
-<hr>
-## NOT WORKING
-
-```{r}
-library(httr)
-
-# 1. Find OAuth settings for linkedin:
-#    https://developer.linkedin.com/documents/linkedins-oauth-details
-endpoints <- oauth_endpoints("linkedin")
-
-# 2. Register an application at https://www.linkedin.com/secure/developer
-#    Make sure to register http://localhost:1410/ as an "OAuth 2.0 Redirect URL".
-#    (the trailing slash is important!)
-#
-#    Replace key and secret below.
-myapp <- oauth_app("linkedin",
-  key = "78uunxniau8vi5",
-  secret = "Yvxi36oB5J886aH7")
-
-# 3. Get OAuth credentials
-token <- oauth2.0_token(endpoints, myapp)
-
-# 4. Use API
-req <- GET("https://api.linkedin.com/v1/people/~?format=json", config(token = token))
-stop_for_status(req)
-content(req)
-```
-
