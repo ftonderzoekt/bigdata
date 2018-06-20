@@ -1,0 +1,77 @@
+---
+title: "Extract jobs from websites"
+output: html_notebook
+---
+
+# Scrape data from saved Linkedin file
+[This](Source: https://www.linkedin.com/jobs/data-scientist-jobs/?country=nl) file was saved as an html file and stored on a local machine. Using the `rvest` package job data was extracted and saved as a csv file.
+
+```{r}
+library(rvest)
+
+# Functions
+## Clean spaces and returns
+
+space_cleaner <- function(string) {
+  cleanstring <- gsub("\\n\\s\\s+|\\n|^\\s+", "", string)
+  return(cleanstring)
+}
+
+linked_jobs <- read_html("linkedin.html")
+
+job <- linked_jobs %>% 
+  html_nodes(".job-card-search__title") %>%
+  html_text() %>% space_cleaner
+
+company <- linked_jobs %>% 
+  html_nodes(".job-card-search__company-name") %>%
+  html_text() %>% space_cleaner
+
+location <- linked_jobs %>% 
+  html_nodes(".job-card-search__location") %>%
+  html_text() %>% space_cleaner
+
+snippet <- linked_jobs %>% 
+  html_nodes(".job-card-search__description-snippet") %>%
+  html_text() %>% space_cleaner
+
+time <- linked_jobs %>% 
+  html_nodes(".job-card-search__time-badge") %>%
+  html_text() %>% space_cleaner
+
+dfLinkedin <- cbind(job, company, location, snippet, time) %>% data.frame(stringsAsFactors = FALSE)
+
+head(dfLinkedin)
+str(dfLinkedin)
+
+write.csv(dfLinkedin, "linkedin-jobs.csv")
+```
+
+<hr>
+## NOT WORKING
+
+```{r}
+library(httr)
+
+# 1. Find OAuth settings for linkedin:
+#    https://developer.linkedin.com/documents/linkedins-oauth-details
+endpoints <- oauth_endpoints("linkedin")
+
+# 2. Register an application at https://www.linkedin.com/secure/developer
+#    Make sure to register http://localhost:1410/ as an "OAuth 2.0 Redirect URL".
+#    (the trailing slash is important!)
+#
+#    Replace key and secret below.
+myapp <- oauth_app("linkedin",
+  key = "78uunxniau8vi5",
+  secret = "Yvxi36oB5J886aH7")
+
+# 3. Get OAuth credentials
+token <- oauth2.0_token(endpoints, myapp)
+
+# 4. Use API
+req <- GET("https://api.linkedin.com/v1/people/~?format=json", config(token = token))
+stop_for_status(req)
+content(req)
+```
+
