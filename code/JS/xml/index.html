@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SalusCheck</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCbjp3fbSx2WUwuQ0NTFJErFPCZwk2AcFc",
+        authDomain: "salustest-7df6a.firebaseapp.com",
+        databaseURL: "https://salustest-7df6a.firebaseio.com",
+        projectId: "salustest-7df6a",
+        storageBucket: "salustest-7df6a.appspot.com",
+        messagingSenderId: "657992195439"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script>
+    // Initialize Cloud Firestore through Firebase
+      var db = firebase.firestore();
+
+      // Disable deprecated features
+      db.settings({
+        timestampsInSnapshots: true
+      });
+
+      db.collection("sanctions").where("nameAlias.attributes.firstName", "==", "Azizollah")
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            var result = doc.data()
+            document.getElementById("demo").innerHTML = result.nameAlias.attributes.firstName + " " + result.nameAlias.attributes.lastName;
+            console.log(doc.id, " => ", doc.data());
+          });
+        })
+        .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
+    </script>
+    <div class="alert alert-danger" role="alert" id="demo"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
