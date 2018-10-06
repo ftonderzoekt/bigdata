@@ -1,10 +1,13 @@
 ---
-title: "About this site"
+title: "Over FTOnderzoekt BDA"
 description: |
-  Some additional details about the website
+  Waarom, Wie en Wat?
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+### Groeien met Big Data
 
+
+### Wie zijn wij?
+
+
+### Wat bieden wij?

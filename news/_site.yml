@@ -1,8 +1,8 @@
 name: "news"
-title: "FTOnderzoekt Big Data"
+title: "FTOnderzoekt: Big Data Analytics"
 description: |
-  FTOnderzoekt Big Data
-output_dir: "docs"
+  Groeien met Big Data!
+output_dir: "."
 navbar:
   right:
     - text: "Home"

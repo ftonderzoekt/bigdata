@@ -12,6 +12,7 @@
     "firebase-admin": "^6.0.0",
     "fs": "0.0.1-security",
     "json-beautify": "^1.0.1",
+    "mongodb": "^3.1.6",
     "path": "^0.12.7",
     "read-xml": "^3.0.0",
     "xml-js": "^1.6.7",

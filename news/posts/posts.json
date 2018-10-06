@@ -1,0 +1,17 @@
+[
+  {
+    "path": "posts/2018-10-01-xml-naar-json/",
+    "title": "Datatransformatie: van XML naar JSON",
+    "description": "Een beschrijving van de volledige workflow in Node.js",
+    "author": [
+      {
+        "name": "Witek ten Hove",
+        "url": "https://www.linkedin.com/in/witektenhove/"
+      }
+    ],
+    "date": "2018-10-01",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2018-10-01T22:54:44+02:00"
+  }
+]
