@@ -1,0 +1,2 @@
+mongo ds119503.mlab.com:19503/salustest -u test -p test545
+mongoimport -h ds119503.mlab.com:19503 -d salustest -c sanctions -u test -p test545 --file test1.json --jsonArray

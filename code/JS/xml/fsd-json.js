@@ -5,6 +5,7 @@ var options = {
                 compact: true,
                 ignoreDeclaration: true,
                 alwaysArray: false,
+                ignoreAttributes: true,
                 attributesKey: 'attributes'
               };
 var result = convert.xml2js(xml, options);

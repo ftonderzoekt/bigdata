@@ -33,15 +33,16 @@ mongodb.MongoClient.connect(uri, function(err, client) {
 
    // Note that the insert method can take either an array or a dict.
 
-   sanctions.find( { "nameAlias.attributes.firstName" : "Robert" }).toArray(function (err, docs) {
+   sanctions.find( { "nameAlias.attributes.firstName" : "KHODAKOVSKY" }).toArray(function (err, docs) {
 
+     console.log(JSON.stringify(docs));
      if(err) throw err;
      docs.forEach(function (doc) {
        console.log(
          'First name: ' +
-         JSON.stringify(doc["nameAlias"]["attributes"]["firstName"]) +
+         JSON.stringify(doc["nameAlias"][attributes]["firstName"]) +
          ', Last name:' +
-         JSON.stringify(doc["nameAlias"]["attributes"]["lastName"])
+         JSON.stringify(doc["nameAlias"][attributes]["lastName"])
        );
      });
 
